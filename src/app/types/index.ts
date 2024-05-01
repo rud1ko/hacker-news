@@ -1,0 +1,1 @@
+export type {NewsItemProps} from './model/NewsProps'

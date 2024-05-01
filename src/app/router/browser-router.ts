@@ -1,12 +1,14 @@
-import {createBrowserRouter, RouteWithRoot} from "@vkontakte/vk-mini-apps-router";
+import {createHashRouter} from "@vkontakte/vk-mini-apps-router";
 
-const routes: RouteWithRoot[] = [
+export const route = createHashRouter([
     {
         path: '/',
-        panel: 'home_panel',
-        view: 'default_view',
-        root: 'default_root',
-    }
-]
-
-export const browserRouter = createBrowserRouter(routes)
+        panel: 'main_page',
+        view: 'listNews',
+    },
+    {
+        path: '/news/:id',
+        panel: 'item_page',
+        view: 'listNews',
+    },
+]);

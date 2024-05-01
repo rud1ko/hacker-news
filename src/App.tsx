@@ -1,16 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {AppRoot, Button} from "@vkontakte/vkui";
+import {Panel, Root, View} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
+import {useActiveVkuiLocation, useGetPanelForView} from "@vkontakte/vk-mini-apps-router";
+import {NewsDetails} from "./pages/newsDetails";
+import {LastNews} from "./pages/lastNews";
+
 
 function App() {
+  const {view: activeView} = useActiveVkuiLocation() as { view: string }
+  const activePanel = useGetPanelForView('default_view') as string;
+
   return (
-    <>
-      <Button appearance={"overlay"}>
-        Hello world
-      </Button>
-    </>
+    <Root activeView={activeView}>
+        <View nav="listNews" activePanel={activePanel}>
+            <Panel nav="main_page">
+                <LastNews/>
+            </Panel>
+            <Panel nav="item_page">
+                <NewsDetails/>
+            </Panel>
+        </View>
+    </Root>
   );
 }
 

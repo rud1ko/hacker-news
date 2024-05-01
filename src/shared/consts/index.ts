@@ -1,0 +1,1 @@
+export {LAST_NEWS} from './lastNews'
