@@ -33,9 +33,9 @@ export const LastNews = () => {
                     <Button appearance={"accent"} onClick={() => refetch()}>Обновить новости</Button>
                 </Div>
                 {isLoading || isFetching ? <LoadingSpinner/> : null}
-                <Group mode="plain">
+                {!isFetching && <Group mode="plain">
                     {data?.map((info, idx) => <NewsItem key={info.id} info={info}/>)}
-                </Group>
+                </Group>}
             </Div>
         </>
     );

@@ -14,7 +14,7 @@ export const NewsDetails = () => {
     const routeNavigator = useRouteNavigator();
 
     return (
-        <>
+        <Div>
             <Group>
                 <Div>
                     <Button appearance={"accent"} onClick={() => routeNavigator.push("/")}>
@@ -55,6 +55,6 @@ export const NewsDetails = () => {
                 </Div>
                 <CommentTree newsId={Number(news?.id)}/>
             </Group>
-        </>
+        </Div>
     );
 };
