@@ -10,7 +10,7 @@ import {actions} from "../../../app/redux/kidsDeleted.slice";
 
 
 export const LastNews = () => {
-    const {data, error, isLoading, refetch, isFetching} = useGetAllTopStoriesIdQuery()
+    const {data, error, isLoading,refetch , isFetching} = useGetAllTopStoriesIdQuery()
     const dispatch = useDispatch()
 
     useEffect(() => {

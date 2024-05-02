@@ -1,5 +1,5 @@
 import React, {JSX} from 'react';
-import {NewsItemProps} from "../../app/types/model/NewsProps";
+import {NewsItemProps} from "../../app/types";
 import {useRouteNavigator} from "@vkontakte/vk-mini-apps-router";
 import {Avatar, Card, CardGrid, Div, Paragraph, SimpleCell, Spacing, Title} from "@vkontakte/vkui";
 import {Icon28UserOutline} from "@vkontakte/icons";

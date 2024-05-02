@@ -7,11 +7,16 @@ import {Icon24MessageOutline} from "@vkontakte/icons";
 import styles from './NewsDetails.module.css'
 import {convertUnixTimeToDateTime} from "../../../shared/functions";
 import {CommentTree} from "../../../widgets/CommentTree";
+import {LoadingSpinner} from "../../../shared/ui-kit";
 
 export const NewsDetails = () => {
     const newsId = useParams()
     const {data: news, isLoading, error} = useGetNewsByIdQuery(parseInt(newsId?.id || '0'));
     const routeNavigator = useRouteNavigator();
+
+    if (isLoading){
+        return <LoadingSpinner/>
+    }
 
     return (
         <Div>

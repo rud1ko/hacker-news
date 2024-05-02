@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {useGetNewsByIdQuery} from "../../../app/redux/api/new-stories-api";
+import {useGetAllChildsQuery, useGetNewsByIdQuery} from "../../../app/redux/api/new-stories-api";
 import {Avatar, Button, Caption, Cell, Div, Paragraph, Title} from "@vkontakte/vkui";
 import styles from './Comment.module.css'
 import {Icon24ChevronDown, Icon24ChevronUp, Icon28User} from "@vkontakte/icons";
@@ -10,6 +10,7 @@ import {actions} from "../../../app/redux/kidsDeleted.slice";
 export const Comment = ({id}: { id: number }) => {
     const { data: comment, isFetching } = useGetNewsByIdQuery(id);
     const [isShowChildComments, setIsShowChildComments] = useState(false);
+    const {data: childs} = useGetAllChildsQuery(id)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -36,15 +37,15 @@ export const Comment = ({id}: { id: number }) => {
                 // @ts-ignore
                        dangerouslySetInnerHTML={{ __html: comment?.text }}/>
 
-            {comment?.kids && comment.kids.length > 0 && (
+            {comment?.kids && comment.kids.length > 0 && childs?.length !== 0 && (
                 <Button mode="tertiary" before={isShowChildComments ? <Icon24ChevronUp /> : <Icon24ChevronDown />} onClick={toggleIsShowChildComments} className={styles.showButton}>
                     {isShowChildComments ? 'Скрыть ответы' : 'Показать ответы'}
                 </Button>
             )}
 
-            {isShowChildComments && comment?.kids?.map((childId) => (
-                <Div key={childId} style={{ paddingLeft: 58 }}>
-                    <Comment id={childId} />
+            {isShowChildComments && childs?.map((item) => (
+                <Div key={item.id} style={{ paddingLeft: 58 }}>
+                    <Comment id={item.id} />
                 </Div>
             ))}
         </Div>

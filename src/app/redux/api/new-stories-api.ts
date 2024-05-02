@@ -30,8 +30,20 @@ export const NewStoriesApi =  createApi({
                 return formattedNewsItems;
             },
         }),
+        getAllChilds: builder.query<NewsItemProps[], number>({
+            query: (id) => `item/${id}.json?print=pretty`,
+            transformResponse: async (response: NewsItemProps) => {
+                const kids = response.kids
+                const promises = kids.map((el) =>
+                    fetch(`${LAST_NEWS}item/${el}.json`).then((res) => res.json())
+                )
+                const newsItems: NewsItemProps[] = await Promise.all(promises);
+                const formattedNewsItems = newsItems.filter(newsItem => !newsItem.deleted);
+                return formattedNewsItems;
+            },
+        }),
         getNewsById: builder.query<NewsItemProps, number>({query: (id) => `item/${id}.json?print=pretty`})
     })
 })
 
-export const {useGetAllTopStoriesIdQuery, useGetNewsByIdQuery} = NewStoriesApi
+export const {useGetAllTopStoriesIdQuery, useGetNewsByIdQuery, useGetAllChildsQuery} = NewStoriesApi
