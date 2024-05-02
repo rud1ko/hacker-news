@@ -2,7 +2,7 @@
 
 app id: 51916271
 
-Ссылка на приложение: [Hacker-news](https://stage-app51916271-efa417449b9b.pages.vk-apps.com/index.html)
+Ссылка на приложение: [Hacker-news](https://prod-app51916271-964ecfa7009c.pages-ac.vk-apps.com/index.html)
 
 Данное приложение предоставляет пользователю самую свежую информация в мире IT, используя Hacker News API.
 
