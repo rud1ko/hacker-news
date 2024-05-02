@@ -4,16 +4,20 @@ import {useGetAllTopStoriesIdQuery} from "../../../app/redux/api/new-stories-api
 import styles from './LastNews.module.css'
 import {LoadingSpinner} from "../../../shared/ui-kit";
 import {NewsItem} from "../../../entities/news";
+import {useDispatch} from "react-redux";
+import {actions} from "../../../app/redux/kidsDeleted.slice";
 
 
 
 export const LastNews = () => {
     const {data, error, isLoading, refetch, isFetching} = useGetAllTopStoriesIdQuery()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const intervalId = setInterval(() => {
             window.location.reload();
         }, 60000);
+        dispatch(actions.clear())
 
         return () => clearInterval(intervalId);
     }, [data]);

@@ -1,13 +1,22 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useGetNewsByIdQuery} from "../../../app/redux/api/new-stories-api";
 import {Avatar, Button, Caption, Cell, Div, Paragraph, Title} from "@vkontakte/vkui";
 import styles from './Comment.module.css'
 import {Icon24ChevronDown, Icon24ChevronUp, Icon28User} from "@vkontakte/icons";
 import {convertUnixTimeToDateTime} from "../../../shared/functions";
+import {useDispatch} from "react-redux";
+import {actions} from "../../../app/redux/kidsDeleted.slice";
 
 export const Comment = ({id}: { id: number }) => {
     const { data: comment, isFetching } = useGetNewsByIdQuery(id);
     const [isShowChildComments, setIsShowChildComments] = useState(false);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (comment){
+            dispatch(actions.isDeletedAdd(comment?.deleted !== undefined))
+        }
+    }, [comment]);
 
     const toggleIsShowChildComments = useCallback(() => {
         setIsShowChildComments(prev => !prev);
